@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 
 public abstract class ConsoleItem {
     String item;
+    String itemName;
     int price;
 
     public abstract JLabel getItem();

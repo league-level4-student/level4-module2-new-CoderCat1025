@@ -39,9 +39,9 @@ public class ConsoleStore {
 	 */
 
 	public static void main(String[] args) {
-		//NOTE: don't initialize money and price here unless you're testing stuff like checkout
-		int money = 25;
-		int price = 55;
+		//NOTE: don't initialize price here unless you're testing stuff like checkout
+		int money = 40;
+		int price = 0;
 		boolean purchased = false;
 		boolean inCheckOut = false;
 		boolean checkOutReturn = false;
@@ -54,40 +54,93 @@ public class ConsoleStore {
 
 		do {
 			//store main interface thingy
-			System.out.println("What can I help you with? (add/remove/view/check out)");
+			System.out.println("What can I help you with? (help/add/remove/view/check out)");
 			String help = scan.nextLine();
 			switch (help) {
+			case "help":
+
+				//help/infodumping
+				System.out.println("What do you need help with? (prices/wallet)");
+				String info = scan.nextLine();
+				switch(info) {
+				case "prices":
+					//NOTE: Update here when you add new items or change prices
+					System.out.println("Store prices: \n cat - $15 \n chips - $5 \n gaming controller - $10 \n water - $5 \n pepper spray - $10");
+					break;
+				case "wallet":
+					price=0;
+					for (int i = 0; i < cart.length(); i++) {
+						price = cart.getItem(i) == null ? price : price+cart.getItem(i).price;
+
+					}
+					System.out.println("You have $" + money + " in your wallet. The total price of your items is $" + price + ".");
+					break;
+				default:
+					System.out.println("You not too sure what to do.");
+					break;
+				}
+
+				break;
 			case "add":
 				System.out.println("You go to the shelves to put something in your cart. What do you add?");
-				
+
 				String add = scan.nextLine();
+				add = add.trim();
+				add = add.toLowerCase();
 				
-				//what will you add (NOTE: fix the error later)
+				//what will you add
 				switch (add) {
 				case "cat":
 					System.out.println("You pick a cat off the shelves.");
-					//cart.add(Cat);
+					cart.add(new Cat());
 					break;
-					
+				case "chips":
+					System.out.println("You get some chips.");
+					cart.add(new Chips());
+					break;
+				case "gaming controller":
+					System.out.println("You pick up a gaming controller.");
+					cart.add(new Controller());
+					break;
+				case "controller":
+					System.out.println("You pick up a gaming controller.");
+					cart.add(new Controller());
+					break;
+				case "water":
+					System.out.println("You get a bottle of water.");
+					cart.add(new Water());
+					break;
+				case "bottle of water":
+					System.out.println("You get a bottle of water.");
+					cart.add(new Water());
+					break;
+				case "pepper spray":
+					System.out.println("You get a can of pepper spray.");
+					cart.add(new PepperSpray());
+					break;
+				case "can of pepper spray":
+					System.out.println("You get a can of pepper spray.");
+					cart.add(new PepperSpray());
+					break;
 				default: 
 					System.out.println("You're not too sure what to add.");
 					break;
 				}
-				
+
 				break;
 			case "remove":
-				System.out.println("You go to the nearest shelf to take out something from your cart. What do you remove?");
-				String remove = scan.nextLine();
-				
-				//what will you remove (NOTE: i think i should use an int here like cart[i].remove(1);)
-				System.out.println("Removed " + remove + ".");
-				
+				System.out.println("You go to the nearest shelf to take out something from your cart. What do you remove? (# of item in cart)");
+				int remove = scan.nextInt();
+				System.out.println("You remove the " + cart.getItem(remove-1).itemName + ".");
+				cart.remove(remove-1);
+
 				break;
 			case "view":
 				System.out.println("You peer into your cart to see whatever you bought.");
 				cart.showCart();
-				
-				//NOTE: for some reason you cant scan after this?? like it's scanning you can't input. fix that later
+
+				//NOTE: for some reason you cant scan after this?? like it's scanning but you can't input. fix that later
+				//NOTE: so it seems like it just ends the program. ask nick about it later
 				break;
 			case "check out":
 				inCheckOut=true;
@@ -99,7 +152,13 @@ public class ConsoleStore {
 
 			//check out
 			while (inCheckOut) {
-				String e = money > price ? "You go to the check-out and purchase your items." : "You don't have enough money.";
+				price=0;
+				for (int i = 0; i < cart.length(); i++) {
+					price = cart.getItem(i) == null ? price : price+cart.getItem(i).price;
+
+				}
+
+				String e = money >= price ? "You go to the check-out and purchase your items." : "You don't have enough money.";
 				System.out.println(e);
 				purchased = e.contains("purchase") ? true : false;
 				checkOutReturn = e.contains("purchase") ? false : true;
@@ -125,16 +184,21 @@ public class ConsoleStore {
 
 		//receipt
 		inCheckOut=false;
-		cart.showCart();
+
+		//NOTE: uncomment this after adding images
+		//cart.showCart();
+
 		System.out.println("Here is your receipt: \n Name: " + name + "\n Items bought: ");
 
 		for (int i = 0; i < cart.length(); i++) {
-			//NOTE: make a getter method for cart items (sighhhhh)
-			
-			//System.out.println(" " + cart.get);
+			String a = cart.getItem(i) == null ? "nothing" : " " + cart.getItem(i).itemName + " - $" + cart.getItem(i).price;
+			if (a.contains(" ")) {
+				System.out.println(a);
+			}
 		}
-		
-		System.out.println(" Price: " + price + "\n Money Left: " + money);
+
+		System.out.println(" Total: $" + price + "\n Money Left: $" + money);
+		System.out.println("Thank you for shopping with us!");
 	}
 
 }

@@ -4,13 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/*
- * The Cart class is a Bounded Type Generic class
- * 
- * <T extends Food> means we can only create a Cart with objects part of the 
- * Food class
- */
-
 @SuppressWarnings("unchecked")
 public class ConsoleCart<T extends ConsoleItem> {
     private T[] cart;
@@ -29,6 +22,11 @@ public class ConsoleCart<T extends ConsoleItem> {
         }
         JOptionPane.showMessageDialog(null,
                 "Your cart is full!\nNo more than 5 items");
+    }
+    
+    //removes item
+    public void remove(int i) {
+    	cart[i] = null;
     }
 
     // Displays everything currently in the cart
@@ -50,5 +48,9 @@ public class ConsoleCart<T extends ConsoleItem> {
 
     public int length() {
         return cart.length;
+    }
+    
+    public ConsoleItem getItem(int i) {
+    	return cart[i];
     }
 }

@@ -16,6 +16,7 @@ public class Cat extends ConsoleItem{
 			this.item = "cereal2.jpeg";
 		}
 		price = 15;
+		itemName = "cat";
 	}
 	
 	@Override

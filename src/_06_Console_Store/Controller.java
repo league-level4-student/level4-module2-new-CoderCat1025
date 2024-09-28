@@ -4,19 +4,19 @@ import java.util.Random;
 
 import javax.swing.JLabel;
 
-public class Chips extends ConsoleItem{
-	
-	//NOTE: add images (one should be fries, the other should be chips >:) upset the british AND the americans)
+public class Controller extends ConsoleItem{
 
-	public Chips() {
+	public Controller() {
 		if(new Random().nextBoolean()) {
+			//NOTE: ADD IMAGES PLEASE PLEASE PLEASE AAAAAA
+			//dhruva brand controllers? ha
 			this.item = "cereal1.jpeg";
 		}
 		else {
 			this.item = "cereal2.jpeg";
 		}
-		price = 5;
-		itemName = "chips";
+		price = 10;
+		itemName = "gaming controller";
 	}
 	
 	@Override
