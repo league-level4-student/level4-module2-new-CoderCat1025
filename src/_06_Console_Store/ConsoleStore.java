@@ -39,46 +39,102 @@ public class ConsoleStore {
 	 */
 
 	public static void main(String[] args) {
-		//dont initialize money+price here unless you're testing
-		int money = 50;
-		int price = 25;
+		//NOTE: don't initialize money and price here unless you're testing stuff like checkout
+		int money = 25;
+		int price = 55;
 		boolean purchased = false;
 		boolean inCheckOut = false;
+		boolean checkOutReturn = false;
 		Scanner scan = new Scanner(System.in);
-		
+		ConsoleCart cart = new ConsoleCart<ConsoleItem>();
+
 		System.out.println("Hello shopper! What is your name?");
 		String name = scan.nextLine();
+		System.out.println("Welcome to the store, " + name + "!");
 
 		do {
+			//store main interface thingy
+			System.out.println("What can I help you with? (add/remove/view/check out)");
+			String help = scan.nextLine();
+			switch (help) {
+			case "add":
+				System.out.println("You go to the shelves to put something in your cart. What do you add?");
+				
+				String add = scan.nextLine();
+				
+				//what will you add (NOTE: fix the error later)
+				switch (add) {
+				case "cat":
+					System.out.println("You pick a cat off the shelves.");
+					//cart.add(Cat);
+					break;
+					
+				default: 
+					System.out.println("You're not too sure what to add.");
+					break;
+				}
+				
+				break;
+			case "remove":
+				System.out.println("You go to the nearest shelf to take out something from your cart. What do you remove?");
+				String remove = scan.nextLine();
+				
+				//what will you remove (NOTE: i think i should use an int here like cart[i].remove(1);)
+				System.out.println("Removed " + remove + ".");
+				
+				break;
+			case "view":
+				System.out.println("You peer into your cart to see whatever you bought.");
+				cart.showCart();
+				
+				//NOTE: for some reason you cant scan after this?? like it's scanning you can't input. fix that later
+				break;
+			case "check out":
+				inCheckOut=true;
+				break;
+			default:
+				System.out.println("Please enter a valid input.");
+				break;	
+			}
 
 			//check out
-			do {
-			inCheckOut = true;
-			String e = money > price ? "You go to the check-out and purchase your items." : "You don't have enough money.";
-			System.out.println(e);
-			purchased = e.contains("purchase") ? true : false;
-			
-			System.out.println("Would you like to stay to remove items? (yes/no)");
-			e = scan.nextLine();
-			e = e.equals("yes") ? "You go back to the shelves to return items." : "So... You're just gonna steal? (yes/no)";
-			System.out.println(e);
-			inCheckOut = e.contains("return") ? false : true;
-			
-			scan.nextLine();
-			e = e.equals("yes") ? "Okay... You steal all of the stuff in your cart." : "You go back to the shelves to return items.";
-			System.out.println(e);
-			price = 0;
-			purchased = true;
-			
-			
-			} while (inCheckOut);
-			
+			while (inCheckOut) {
+				String e = money > price ? "You go to the check-out and purchase your items." : "You don't have enough money.";
+				System.out.println(e);
+				purchased = e.contains("purchase") ? true : false;
+				checkOutReturn = e.contains("purchase") ? false : true;
+
+				//removing items and stealing stuff
+				while (checkOutReturn) {
+					System.out.println("Would you like to stay to remove items? (yes/no)");
+					e = scan.nextLine();
+
+					e = e.equals("yes") ? "You go back to the shelves to return items." : "So, uh, you steal the stuff you were supposed to buy.";
+					System.out.println(e);
+					purchased = e.contains("return") ? false : true;
+					price = e.contains("return") ? price : 0;
+					checkOutReturn=false;
+				}
+
+				inCheckOut=false;
+
+			}
+
 		} while (!purchased);
-		
+		money = money-price;
+
 		//receipt
 		inCheckOut=false;
-		System.out.println("Here is your receipt: \n Name: " + name);
+		cart.showCart();
+		System.out.println("Here is your receipt: \n Name: " + name + "\n Items bought: ");
 
+		for (int i = 0; i < cart.length(); i++) {
+			//NOTE: make a getter method for cart items (sighhhhh)
+			
+			//System.out.println(" " + cart.get);
+		}
+		
+		System.out.println(" Price: " + price + "\n Money Left: " + money);
 	}
 
 }
