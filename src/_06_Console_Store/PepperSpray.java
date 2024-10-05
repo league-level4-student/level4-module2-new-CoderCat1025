@@ -7,13 +7,14 @@ import javax.swing.JLabel;
 public class PepperSpray extends ConsoleItem{
 
 	public PepperSpray() {
+		
+		//to deal with scary people
+		
 		if(new Random().nextBoolean()) {
-			//NOTE: ADD IMAGES PLEASE PLEASE PLEASE AAAAAA
-			//bo'ol o' wo'er
-			this.item = "cereal1.jpeg";
+			this.item = "pink pepper spray.png";
 		}
 		else {
-			this.item = "cereal2.jpeg";
+			this.item = "pepper spray.jpeg";
 		}
 		price = 10;
 		itemName = "can of pepper spray";

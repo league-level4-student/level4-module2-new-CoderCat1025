@@ -5,15 +5,13 @@ import java.util.Random;
 import javax.swing.JLabel;
 
 public class Chips extends ConsoleItem{
-	
-	//NOTE: add images (one should be fries, the other should be chips >:) upset the british AND the americans)
-
+	//chips??? fries??????
 	public Chips() {
 		if(new Random().nextBoolean()) {
-			this.item = "cereal1.jpeg";
+			this.item = "chips.jpeg";
 		}
 		else {
-			this.item = "cereal2.jpeg";
+			this.item = "fries.jpeg";
 		}
 		price = 5;
 		itemName = "chips";

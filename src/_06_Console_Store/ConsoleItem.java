@@ -17,11 +17,10 @@ public abstract class ConsoleItem {
     public static ImageIcon loadImage(String fileName) {
         try {
             return new ImageIcon(ImageIO
-                    .read(new ConsoleCart().getClass().getResourceAsStream("images/"+fileName)));
+                    .read(new ConsoleCart().getClass().getResourceAsStream(fileName)));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 }
-

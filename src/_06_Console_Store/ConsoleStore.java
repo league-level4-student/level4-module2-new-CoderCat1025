@@ -46,7 +46,7 @@ public class ConsoleStore {
 		boolean inCheckOut = false;
 		boolean checkOutReturn = false;
 		Scanner scan = new Scanner(System.in);
-		ConsoleCart cart = new ConsoleCart<ConsoleItem>();
+		ConsoleCart<ConsoleItem> cart = new ConsoleCart<ConsoleItem>();
 
 		System.out.println("Hello shopper! What is your name?");
 		String name = scan.nextLine();
@@ -87,7 +87,7 @@ public class ConsoleStore {
 				String add = scan.nextLine();
 				add = add.trim();
 				add = add.toLowerCase();
-				
+
 				//what will you add
 				switch (add) {
 				case "cat":
@@ -180,13 +180,13 @@ public class ConsoleStore {
 			}
 
 		} while (!purchased);
+		scan.close();
 		money = money-price;
 
 		//receipt
 		inCheckOut=false;
 
-		//NOTE: uncomment this after adding images
-		//cart.showCart();
+		cart.showCart();
 
 		System.out.println("Here is your receipt: \n Name: " + name + "\n Items bought: ");
 

@@ -20,8 +20,7 @@ public class ConsoleCart<T extends ConsoleItem> {
                 return;
             }
         }
-        JOptionPane.showMessageDialog(null,
-                "Your cart is full!\nNo more than 5 items");
+        System.out.println("Your cart is full! You put the item back where you got it.");
     }
     
     //removes item

@@ -6,19 +6,17 @@ import javax.swing.JLabel;
 
 public class Cat extends ConsoleItem{
 
-	//NOTE: add images
-	
 	public Cat() {
 		if(new Random().nextBoolean()) {
-			this.item = "cereal1.jpeg";
+			this.item = "silly cat.png";
 		}
 		else {
-			this.item = "cereal2.jpeg";
+			this.item = "other cat.jpeg";
 		}
 		price = 15;
 		itemName = "cat";
 	}
-	
+
 	@Override
 	public JLabel getItem() {
 		return new JLabel(loadImage(this.item));
