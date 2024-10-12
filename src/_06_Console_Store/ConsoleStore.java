@@ -114,6 +114,10 @@ public class ConsoleStore {
 					System.out.println("You get a bottle of water.");
 					cart.add(new Water());
 					break;
+				case "bo'ol o' wo'er":
+					System.out.println("You get a bo'ol o' wo'er (you're british, aren't you?).");
+					cart.add(new Water());
+					break;
 				case "pepper spray":
 					System.out.println("You get a can of pepper spray.");
 					cart.add(new PepperSpray());
